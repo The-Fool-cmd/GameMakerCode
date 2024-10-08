@@ -1,0 +1,35 @@
+// Feather disable GM2017
+var moveSpeed = 2; // general movement speed variable
+var hspd = 0; // vertical speed
+var vspd = 0; // horizontal speed
+// Movement Input
+if (keyboard_check(vk_up) || keyboard_check(ord("W"))) {
+    vspd = -moveSpeed; // Up
+}
+if (keyboard_check(vk_down) || keyboard_check(ord("S"))) {
+    vspd = moveSpeed; // Down
+}
+if (keyboard_check(vk_left) || keyboard_check(ord("A"))) {
+    hspd = -moveSpeed; // Left
+}
+if (keyboard_check(vk_right) || keyboard_check(ord("D"))) {
+    hspd = moveSpeed; // Right
+}
+show_debug_message(hspd);
+show_debug_message(vspd);
+//Horizontal Collision checking with tileset "wall"
+if place_meeting(x+hspd,y,col_wall) {
+    while !place_meeting(x+sign(hspd),y,col_wall) {
+        x += sign(hspd);
+    }
+    hspd = 0;
+}
+x += hspd;
+//Vertical Collision checking with tileset "wall"
+if place_meeting(x,y +vspd,col_wall) {
+    while !place_meeting(x,y+sign(vspd),col_wall) {
+        y += sign(vspd);
+    }
+    vspd = 0;
+}
+y += vspd;
