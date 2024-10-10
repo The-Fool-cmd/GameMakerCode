@@ -1,0 +1,20 @@
+  hspd = moveSpeed; // Right
+}
+show_debug_message(hspd);
+show_debug_message(vspd);
+//Horizontal Collision checking with tileset "wall"
+if place_meeting(x+hspd,y,col_wall) {
+    while !place_meeting(x+sign(hspd),y,col_wall) {
+        x += sign(hspd);
+    }
+    hspd = 0;
+}
+x += hspd;
+//Vertical Collision checking with tileset "wall"
+if place_meeting(x,y +vspd,col_wall) {
+    while !place_meeting(x,y+sign(vspd),col_wall) {
+        y += sign(vspd);
+    }
+    vspd = 0;
+}
+y += vspd;
